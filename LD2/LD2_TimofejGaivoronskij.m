@@ -59,6 +59,7 @@ for i=1:eil
         tekstas = sprintf('A(%d, %d) = ', i, j);
         A(i, j) = input(tekstas)
     end
-endB = repelem(A, 4);
+end
+B = repelem(A, 4);
 disp('vektorius B yra:')
 disp(B)
