@@ -1,0 +1,97 @@
+% Timofej Gaivoronskij 
+% EEF - 25/1
+% 2026-09-14
+
+%1
+clear
+close all
+x = -pi:0.1:pi;
+f1 = tan(sin(x))+sin(tan(x));
+f2 = exp(-0.5*x);
+f3 = sin(x);
+
+figure(1)
+plot(x, f1, 'Color', 'y')
+grid on
+title("f(x) = tan(sin(x))+sin(tan(x))")
+xlabel('x ašis')
+ylabel('f(x) ašis')
+
+figure(2)
+subplot(2, 1, 1)
+semilogy(x, f2)
+grid on 
+title("f(x) = exp(-0.5*x)")
+xlabel('x ašis')
+ylabel('y ašis (logaritminė priklausomybė)')
+
+subplot(2, 1, 2)
+plot(x, f3)
+grid on
+title("f(x) = sin(x)")
+xlabel('x ašis')
+ylabel('y ašis')
+
+%2
+clear
+close all
+NM = rand(6, 4)
+figure
+subplot(2, 1, 1)
+area(NM)
+title('Atsitiktinių reikšmių plotas')
+xlabel('Eilių indeksas')
+ylabel('Reikšmė')
+grid on
+subplot(2, 1, 2)
+mesh(NM)
+title('Paviršiaus tipo diagrama')
+xlabel('Stulpelio indeksas')
+ylabel('Eilutės indeksas')
+zlabel('Reikšmė')
+
+%PAPILDOMA užduotis
+clear
+close all
+%3
+t = 0:0.002:1.2;
+A = 5.5;
+f = 8;
+sigma = 0.8;
+U1 = 3.5;
+U2 = 1.5;
+
+s=A*sin(2*pi*f*t);
+n = sigma*randn(size(t));
+s=s+n;
+s_b = s;
+s_b(abs(s_b)<U2) = 0;
+
+figure
+subplot(1, 2, 1)
+plot(t, s, 'b-', t, s_b, 'y:')
+hold on
+yline(U1);
+yline(U2, ':')
+title('Pradinis ir filtruotas signalai')
+xlabel("s", 'FontSize', 14, 'FontWeight', 'bold');
+ylabel("U", 'FontSize', 14, 'FontWeight', 'bold')
+legend('Pradinis', 'Filtruotas', 'U1', 'U2', 'Location', 'bestoutside')
+
+subplot(1, 2, 2)
+virsija = s > U1;
+stem(t(virsija), s(virsija))
+hold on
+minU = min(s(virsija))
+maxU = max(s(virsija))
+minV = virsija & (s == minU);
+maxV = virsija & (s == maxU);
+maxU = max(s(virsija))
+plot(t(minV), s(minV), 'gv', 'MarkerSize', 8)
+plot(t(maxV), s(maxV), 'r^', 'MarkerSize', 12)
+title('Reikšmės virš U1');
+xlabel('Laikas, s')
+ylabel('Įtampa, V')
+legend('Signalas', 'Minimumai', 'Maksimumai')
+ylim([U1 max(s)+0.5])
+grid on
