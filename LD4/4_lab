@@ -1,0 +1,53 @@
+clear
+
+x=linspace(-1, 1, 1000);
+y=linspace(-1, 1, 1000);
+
+[X, Y] = meshgrid(x, y);
+R = sqrt(X.^2 + Y.^2);
+Z = exp(R.^2);
+figure
+subplot(2, 1, 1);
+surf(X, Y, Z);
+shading interp
+title('Trimatis paviršiaus grafikas', 'FontWeight', 'bold');
+xlabel('X');
+ylabel('Y');
+zlabel('Z');
+grid on
+view(10, 10);
+
+
+x=linspace(-2, 2, 20);
+y=linspace(-2, 2, 20);
+
+[X, Y] = meshgrid(x, y);
+Z = sin((X.^2+Y.^2)/20).*exp(-(X.^2+Y.^2));
+subplot(2, 1, 2);
+surf(X, Y, Z);
+shading flat
+title('Trimatis tūrio grafikas, f(x, y) = sin((x^2+y^2)/20)*exp(-(x^2+y^2))');
+xlabel('X');
+ylabel('Y');
+zlabel('Z');
+view(15, 15);
+grid on
+axis([-2, 2, -2, 2, -1, 1])
+
+clear
+syms x y
+x = -2:0.01:2;
+y = -2:0.01:2;
+[X, Y] = meshgrid(x, y);
+Z = 1 - (X.^2+Y.^2);
+figure
+surf(X, Y, Z);
+colormap([1 0 0 ])
+shading flat
+camlight('left')
+lighting gouraud
+
+title('Paraboloido paviršiaus grafikas');
+xlabel('X');
+ylabel('Y');
+zlabel('Z');
